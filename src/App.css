@@ -1,38 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header h1 {
   color: white;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
-.App-link {
-  color: #61dafb;
+.main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.event-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.event-form input,
+.event-form select,
+.event-form button {
+  padding: 0.75rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.event-form input:focus,
+.event-form select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.event-form button {
+  background: #667eea;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.event-form button:hover:not(:disabled) {
+  background: #5a6fd8;
+  transform: translateY(-1px);
+}
+
+.event-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.events-list h2 {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.empty-state {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.event-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #667eea;
+  transition: transform 0.2s;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+}
+
+.event-card.exam {
+  border-left-color: #e74c3c;
+}
+
+.event-card.quiz {
+  border-left-color: #f39c12;
+}
+
+.event-card.assignment {
+  border-left-color: #27ae60;
+}
+
+.event-card.laboratory {
+  border-left-color: #9b59b6;
+}
+
+.event-card.recitation {
+  border-left-color: #3498db;
+}
+
+.event-card.study {
+  border-left-color: #95a5a6;
+}
+
+.event-card.lecture {
+  border-left-color: #667eea;
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.event-header h3 {
+  color: #2c3e50;
+  font-size: 1.2rem;
+}
+
+.event-type {
+  background: #667eea;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.event-card.exam .event-type {
+  background: #e74c3c;
+}
+
+.event-card.quiz .event-type {
+  background: #f39c12;
+}
+
+.event-card.assignment .event-type {
+  background: #27ae60;
+}
+
+.event-card.laboratory .event-type {
+  background: #9b59b6;
+}
+
+.event-card.recitation .event-type {
+  background: #3498db;
+}
+
+.event-card.study .event-type {
+  background: #95a5a6;
+}
+
+.event-card.lecture .event-type {
+  background: #667eea;
+}
+
+.event-time {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .event-form {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .header h1 {
+    font-size: 1.5rem;
   }
 }
