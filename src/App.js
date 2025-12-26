@@ -33,7 +33,7 @@ function App() {
     setLoading(true);
     try {
       await axios.post(`${API_URL}/events`, formData);
-      setFormData({ title: '', type: 'Class', time: '' });
+      setFormData({ title: '', type: 'Class Lecture', time: '' });
       fetchEvents();
     } catch (error) {
       console.error('Error adding event:', error);
