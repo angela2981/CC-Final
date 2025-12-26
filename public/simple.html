@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Scheduler</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .form { background: #f5f5f5; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .form input, .form select, .form button { margin: 5px; padding: 10px; }
+        .event { background: white; padding: 15px; margin: 10px 0; border-left: 4px solid #007cba; border-radius: 4px; }
+        .exam { border-left-color: #e74c3c; }
+        .quiz { border-left-color: #f39c12; }
+    </style>
+</head>
+<body>
+    <h1>Student Scheduler</h1>
+    
+    <div class="form">
+        <input type="text" id="title" placeholder="Enter subject (e.g., CS-101)" required>
+        <select id="type">
+            <option value="Class Lecture">Class Lecture</option>
+            <option value="Exam">Exam</option>
+            <option value="Quiz">Quiz</option>
+            <option value="Recitation">Recitation</option>
+            <option value="Laboratory">Laboratory</option>
+            <option value="Assignment">Assignment</option>
+            <option value="Study Time">Study Time</option>
+        </select>
+        <input type="datetime-local" id="time" required>
+        <button onclick="addEvent()">Add Event</button>
+    </div>
+    
+    <div id="events"></div>
+
+    <script>
+        const API_URL = 'http://StudentScheduler-ALB-567353042.ap-southeast-2.elb.amazonaws.com/api';
+        
+        async function loadEvents() {
+            try {
+                const response = await fetch(API_URL + '/events');
+                const events = await response.json();
+                displayEvents(events);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        async function addEvent() {
+            const title = document.getElementById('title').value;
+            const type = document.getElementById('type').value;
+            const time = document.getElementById('time').value;
+            
+            if (!title || !time) return;
+            
+            try {
+                await fetch(API_URL + '/events', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ title, type, time })
+                });
+                
+                document.getElementById('title').value = '';
+                document.getElementById('time').value = '';
+                loadEvents();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        
+        function displayEvents(events) {
+            const container = document.getElementById('events');
+            container.innerHTML = events.map(event => `
+                <div class="event ${event.type.toLowerCase().replace(' ', '')}">
+                    <h3>${event.title}</h3>
+                    <p><strong>${event.type}</strong></p>
+                    <p>${new Date(event.time).toLocaleString()}</p>
+                </div>
+            `).join('');
+        }
+        
+        loadEvents();
+    </script>
+</body>
+</html>
