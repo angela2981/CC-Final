@@ -103,14 +103,15 @@ function App() {
             events.map((event) => (
               <div key={event.eventId} className={`event-card ${event.type.toLowerCase().replace(' ', '')}`}>
                 <div className="event-header">
-                  <h3>{event.title}</h3>
-                  <span className="event-type">{event.type}</span>
+                  <div className="event-title-type">
+                    <h3>{event.title}</h3>
+                    <span className="event-type">{event.type}</span>
+                  </div>
                   <button 
                     className="delete-btn" 
                     onClick={() => deleteEvent(event.eventId)}
-                    title="Delete event"
                   >
-                    ✕
+                    Delete
                   </button>
                 </div>
                 <p className="event-time">{new Date(event.time).toLocaleString()}</p>
