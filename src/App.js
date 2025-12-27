@@ -27,6 +27,15 @@ function App() {
     }
   };
 
+  const deleteEvent = async (eventId) => {
+    try {
+      await axios.delete(`${API_URL}/events/${eventId}`);
+      fetchEvents();
+    } catch (error) {
+      console.error('Error deleting event:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.title || !formData.time) return;
@@ -96,6 +105,13 @@ function App() {
                 <div className="event-header">
                   <h3>{event.title}</h3>
                   <span className="event-type">{event.type}</span>
+                  <button 
+                    className="delete-btn" 
+                    onClick={() => deleteEvent(event.eventId)}
+                    title="Delete event"
+                  >
+                    ✕
+                  </button>
                 </div>
                 <p className="event-time">{new Date(event.time).toLocaleString()}</p>
               </div>

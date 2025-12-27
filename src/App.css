@@ -149,6 +149,24 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
 .event-header h3 {
   color: #2c3e50;
   font-size: 1.2rem;
