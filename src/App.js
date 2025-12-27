@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = 'https://vidhy244m2.execute-api.ap-southeast-2.amazonaws.com/prod/api';
 
 function App() {
   const [events, setEvents] = useState([]);
