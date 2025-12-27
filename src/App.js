@@ -20,9 +20,10 @@ function App() {
   const fetchEvents = async () => {
     try {
       const response = await axios.get(`${API_URL}/events`);
-      setEvents(response.data);
+      setEvents(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error('Error fetching events:', error);
+      setEvents([]);
     }
   };
 
